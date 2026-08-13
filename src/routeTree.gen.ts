@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArshjulRouteImport } from './routes/_authenticated/arshjul'
+import { Route as AuthenticatedAvvikelserRouteImport } from './routes/_authenticated/avvikelser'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedManadMonthRouteImport } from './routes/_authenticated/manad.$month'
 
@@ -35,6 +36,11 @@ const AuthenticatedArshjulRoute = AuthenticatedArshjulRouteImport.update({
   path: '/arshjul',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAvvikelserRoute = AuthenticatedAvvikelserRouteImport.update({
+  id: '/avvikelser',
+  path: '/avvikelser',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -50,6 +56,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/arshjul': typeof AuthenticatedArshjulRoute
+  '/avvikelser': typeof AuthenticatedAvvikelserRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/manad/$month': typeof AuthenticatedManadMonthRoute
 }
@@ -57,6 +64,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/arshjul': typeof AuthenticatedArshjulRoute
+  '/avvikelser': typeof AuthenticatedAvvikelserRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/manad/$month': typeof AuthenticatedManadMonthRoute
 }
@@ -66,20 +74,24 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/arshjul': typeof AuthenticatedArshjulRoute
+  '/_authenticated/avvikelser': typeof AuthenticatedAvvikelserRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/manad/$month': typeof AuthenticatedManadMonthRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/arshjul' | '/dashboard' | '/manad/$month'
+  fullPaths:
+    '/' | '/auth' | '/arshjul' | '/avvikelser' | '/dashboard' | '/manad/$month'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/arshjul' | '/dashboard' | '/manad/$month'
+  to:
+    '/' | '/auth' | '/arshjul' | '/avvikelser' | '/dashboard' | '/manad/$month'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/arshjul'
+    | '/_authenticated/avvikelser'
     | '/_authenticated/dashboard'
     | '/_authenticated/manad/$month'
   fileRoutesById: FileRoutesById
@@ -120,6 +132,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedArshjulRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/avvikelser': {
+      id: '/_authenticated/avvikelser'
+      path: '/avvikelser'
+      fullPath: '/avvikelser'
+      preLoaderRoute: typeof AuthenticatedAvvikelserRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -139,12 +158,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedArshjulRoute: typeof AuthenticatedArshjulRoute
+  AuthenticatedAvvikelserRoute: typeof AuthenticatedAvvikelserRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedManadMonthRoute: typeof AuthenticatedManadMonthRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArshjulRoute: AuthenticatedArshjulRoute,
+  AuthenticatedAvvikelserRoute: AuthenticatedAvvikelserRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedManadMonthRoute: AuthenticatedManadMonthRoute,
 }
