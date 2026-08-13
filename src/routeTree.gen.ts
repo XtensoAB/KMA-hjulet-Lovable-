@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArshjulRouteImport } from './routes/_authenticated/arshjul'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedManadMonthRouteImport } from './routes/_authenticated/manad.$month'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,18 +40,25 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedManadMonthRoute = AuthenticatedManadMonthRouteImport.update({
+  id: '/manad/$month',
+  path: '/manad/$month',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/arshjul': typeof AuthenticatedArshjulRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/manad/$month': typeof AuthenticatedManadMonthRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/arshjul': typeof AuthenticatedArshjulRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/manad/$month': typeof AuthenticatedManadMonthRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -59,12 +67,13 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/arshjul': typeof AuthenticatedArshjulRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/manad/$month': typeof AuthenticatedManadMonthRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/arshjul' | '/dashboard'
+  fullPaths: '/' | '/auth' | '/arshjul' | '/dashboard' | '/manad/$month'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/arshjul' | '/dashboard'
+  to: '/' | '/auth' | '/arshjul' | '/dashboard' | '/manad/$month'
   id:
     | '__root__'
     | '/'
@@ -72,6 +81,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/arshjul'
     | '/_authenticated/dashboard'
+    | '/_authenticated/manad/$month'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,17 +127,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/manad/$month': {
+      id: '/_authenticated/manad/$month'
+      path: '/manad/$month'
+      fullPath: '/manad/$month'
+      preLoaderRoute: typeof AuthenticatedManadMonthRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedArshjulRoute: typeof AuthenticatedArshjulRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedManadMonthRoute: typeof AuthenticatedManadMonthRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArshjulRoute: AuthenticatedArshjulRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedManadMonthRoute: AuthenticatedManadMonthRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
