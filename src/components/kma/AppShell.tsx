@@ -2,6 +2,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import {
   CalendarDays,
   CircleDot,
+  FileText,
   LayoutDashboard,
   LogOut,
   Target,
@@ -18,6 +19,7 @@ const nav = [
   { to: "/arshjul", label: "Årshjul", icon: CircleDot },
   { to: "/avvikelser", label: "Avvikelser", icon: TriangleAlert },
   { to: "/mal", label: "KMA-mål", icon: Target },
+  { to: "/dokument", label: "Dokument & AI", icon: FileText },
 ] as const;
 
 export function AppShell({
