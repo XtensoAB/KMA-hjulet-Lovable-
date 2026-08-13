@@ -77,6 +77,74 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_suggestions: {
+        Row: {
+          activity_type: Database["public"]["Enums"]["activity_type"] | null
+          area: Database["public"]["Enums"]["iso_area"]
+          baseline: number | null
+          checklist: Json
+          created_at: string
+          description: string | null
+          document_id: string | null
+          id: string
+          iso_clauses: string[]
+          kind: string
+          month: number | null
+          rationale: string | null
+          responsible_role: string | null
+          status: string
+          target: number | null
+          title: string
+          unit: string | null
+        }
+        Insert: {
+          activity_type?: Database["public"]["Enums"]["activity_type"] | null
+          area?: Database["public"]["Enums"]["iso_area"]
+          baseline?: number | null
+          checklist?: Json
+          created_at?: string
+          description?: string | null
+          document_id?: string | null
+          id?: string
+          iso_clauses?: string[]
+          kind?: string
+          month?: number | null
+          rationale?: string | null
+          responsible_role?: string | null
+          status?: string
+          target?: number | null
+          title: string
+          unit?: string | null
+        }
+        Update: {
+          activity_type?: Database["public"]["Enums"]["activity_type"] | null
+          area?: Database["public"]["Enums"]["iso_area"]
+          baseline?: number | null
+          checklist?: Json
+          created_at?: string
+          description?: string | null
+          document_id?: string | null
+          id?: string
+          iso_clauses?: string[]
+          kind?: string
+          month?: number | null
+          rationale?: string | null
+          responsible_role?: string | null
+          status?: string
+          target?: number | null
+          title?: string
+          unit?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_suggestions_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       deviations: {
         Row: {
           activity_id: string | null
@@ -150,6 +218,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      documents: {
+        Row: {
+          analysis_status: string
+          analysis_summary: string | null
+          area: Database["public"]["Enums"]["iso_area"]
+          created_at: string
+          file_path: string
+          id: string
+          mime_type: string
+          size_bytes: number
+          title: string
+          updated_at: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          analysis_status?: string
+          analysis_summary?: string | null
+          area?: Database["public"]["Enums"]["iso_area"]
+          created_at?: string
+          file_path: string
+          id?: string
+          mime_type: string
+          size_bytes?: number
+          title: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          analysis_status?: string
+          analysis_summary?: string | null
+          area?: Database["public"]["Enums"]["iso_area"]
+          created_at?: string
+          file_path?: string
+          id?: string
+          mime_type?: string
+          size_bytes?: number
+          title?: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Relationships: []
       }
       objectives: {
         Row: {

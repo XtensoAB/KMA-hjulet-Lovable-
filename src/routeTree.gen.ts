@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArshjulRouteImport } from './routes/_authenticated/arshjul'
 import { Route as AuthenticatedAvvikelserRouteImport } from './routes/_authenticated/avvikelser'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDokumentRouteImport } from './routes/_authenticated/dokument'
 import { Route as AuthenticatedMalRouteImport } from './routes/_authenticated/mal'
 import { Route as AuthenticatedManadMonthRouteImport } from './routes/_authenticated/manad.$month'
 
@@ -47,6 +48,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDokumentRoute = AuthenticatedDokumentRouteImport.update({
+  id: '/dokument',
+  path: '/dokument',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedMalRoute = AuthenticatedMalRouteImport.update({
   id: '/mal',
   path: '/mal',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/arshjul': typeof AuthenticatedArshjulRoute
   '/avvikelser': typeof AuthenticatedAvvikelserRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/dokument': typeof AuthenticatedDokumentRoute
   '/mal': typeof AuthenticatedMalRoute
   '/manad/$month': typeof AuthenticatedManadMonthRoute
 }
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/arshjul': typeof AuthenticatedArshjulRoute
   '/avvikelser': typeof AuthenticatedAvvikelserRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/dokument': typeof AuthenticatedDokumentRoute
   '/mal': typeof AuthenticatedMalRoute
   '/manad/$month': typeof AuthenticatedManadMonthRoute
 }
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/_authenticated/arshjul': typeof AuthenticatedArshjulRoute
   '/_authenticated/avvikelser': typeof AuthenticatedAvvikelserRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/dokument': typeof AuthenticatedDokumentRoute
   '/_authenticated/mal': typeof AuthenticatedMalRoute
   '/_authenticated/manad/$month': typeof AuthenticatedManadMonthRoute
 }
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
     | '/arshjul'
     | '/avvikelser'
     | '/dashboard'
+    | '/dokument'
     | '/mal'
     | '/manad/$month'
   fileRoutesByTo: FileRoutesByTo
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
     | '/arshjul'
     | '/avvikelser'
     | '/dashboard'
+    | '/dokument'
     | '/mal'
     | '/manad/$month'
   id:
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
     | '/_authenticated/arshjul'
     | '/_authenticated/avvikelser'
     | '/_authenticated/dashboard'
+    | '/_authenticated/dokument'
     | '/_authenticated/mal'
     | '/_authenticated/manad/$month'
   fileRoutesById: FileRoutesById
@@ -168,6 +180,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dokument': {
+      id: '/_authenticated/dokument'
+      path: '/dokument'
+      fullPath: '/dokument'
+      preLoaderRoute: typeof AuthenticatedDokumentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/mal': {
       id: '/_authenticated/mal'
       path: '/mal'
@@ -189,6 +208,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedArshjulRoute: typeof AuthenticatedArshjulRoute
   AuthenticatedAvvikelserRoute: typeof AuthenticatedAvvikelserRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDokumentRoute: typeof AuthenticatedDokumentRoute
   AuthenticatedMalRoute: typeof AuthenticatedMalRoute
   AuthenticatedManadMonthRoute: typeof AuthenticatedManadMonthRoute
 }
@@ -197,6 +217,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArshjulRoute: AuthenticatedArshjulRoute,
   AuthenticatedAvvikelserRoute: AuthenticatedAvvikelserRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDokumentRoute: AuthenticatedDokumentRoute,
   AuthenticatedMalRoute: AuthenticatedMalRoute,
   AuthenticatedManadMonthRoute: AuthenticatedManadMonthRoute,
 }
