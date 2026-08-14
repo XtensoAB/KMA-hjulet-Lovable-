@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedArshjulRouteImport } from './routes/_authenticated/arshjul'
 import { Route as AuthenticatedAvvikelserRouteImport } from './routes/_authenticated/avvikelser'
+import { Route as AuthenticatedBolagRouteImport } from './routes/_authenticated/bolag'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDokumentRouteImport } from './routes/_authenticated/dokument'
 import { Route as AuthenticatedMalRouteImport } from './routes/_authenticated/mal'
@@ -43,6 +44,11 @@ const AuthenticatedAvvikelserRoute = AuthenticatedAvvikelserRouteImport.update({
   path: '/avvikelser',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedBolagRoute = AuthenticatedBolagRouteImport.update({
+  id: '/bolag',
+  path: '/bolag',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/arshjul': typeof AuthenticatedArshjulRoute
   '/avvikelser': typeof AuthenticatedAvvikelserRoute
+  '/bolag': typeof AuthenticatedBolagRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/dokument': typeof AuthenticatedDokumentRoute
   '/mal': typeof AuthenticatedMalRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/arshjul': typeof AuthenticatedArshjulRoute
   '/avvikelser': typeof AuthenticatedAvvikelserRoute
+  '/bolag': typeof AuthenticatedBolagRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/dokument': typeof AuthenticatedDokumentRoute
   '/mal': typeof AuthenticatedMalRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/arshjul': typeof AuthenticatedArshjulRoute
   '/_authenticated/avvikelser': typeof AuthenticatedAvvikelserRoute
+  '/_authenticated/bolag': typeof AuthenticatedBolagRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/dokument': typeof AuthenticatedDokumentRoute
   '/_authenticated/mal': typeof AuthenticatedMalRoute
@@ -103,6 +112,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/arshjul'
     | '/avvikelser'
+    | '/bolag'
     | '/dashboard'
     | '/dokument'
     | '/mal'
@@ -113,6 +123,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/arshjul'
     | '/avvikelser'
+    | '/bolag'
     | '/dashboard'
     | '/dokument'
     | '/mal'
@@ -124,6 +135,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/arshjul'
     | '/_authenticated/avvikelser'
+    | '/_authenticated/bolag'
     | '/_authenticated/dashboard'
     | '/_authenticated/dokument'
     | '/_authenticated/mal'
@@ -173,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAvvikelserRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/bolag': {
+      id: '/_authenticated/bolag'
+      path: '/bolag'
+      fullPath: '/bolag'
+      preLoaderRoute: typeof AuthenticatedBolagRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -207,6 +226,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedArshjulRoute: typeof AuthenticatedArshjulRoute
   AuthenticatedAvvikelserRoute: typeof AuthenticatedAvvikelserRoute
+  AuthenticatedBolagRoute: typeof AuthenticatedBolagRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDokumentRoute: typeof AuthenticatedDokumentRoute
   AuthenticatedMalRoute: typeof AuthenticatedMalRoute
@@ -216,6 +236,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedArshjulRoute: AuthenticatedArshjulRoute,
   AuthenticatedAvvikelserRoute: AuthenticatedAvvikelserRoute,
+  AuthenticatedBolagRoute: AuthenticatedBolagRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDokumentRoute: AuthenticatedDokumentRoute,
   AuthenticatedMalRoute: AuthenticatedMalRoute,
