@@ -39,13 +39,21 @@ function progressPct(o: Objective): number {
 
 function ObjectivesPage() {
   const { data: objectives = [] } = useQuery(objectivesQuery());
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <AppShell
       title={`KMA-mål ${CURRENT_YEAR}`}
       subtitle="Måluppföljning som underlag till ledningens genomgång"
+      actions={
+        <Button size="sm" onClick={() => setDialogOpen(true)}>
+          <Plus className="size-4" /> Nytt mål
+        </Button>
+      }
     >
+      <ObjectiveDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+
         {objectives.map((o) => {
           const pct = progressPct(o);
           return (
