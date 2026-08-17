@@ -1,9 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { Plus } from "lucide-react";
+import { useState } from "react";
 
 import { AppShell } from "@/components/kma/AppShell";
+import { ObjectiveDialog } from "@/components/kma/ObjectiveDialog";
+import { Button } from "@/components/ui/button";
 import { AREA_SHORT, AREA_VAR, type Objective } from "@/lib/kma";
 import { objectivesQuery, CURRENT_YEAR } from "@/lib/kma-queries";
+
 
 export const Route = createFileRoute("/_authenticated/mal")({
   head: () => ({
