@@ -1,9 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { Plus } from "lucide-react";
+import { useState } from "react";
 
 import { AppShell } from "@/components/kma/AppShell";
+import { ObjectiveDialog } from "@/components/kma/ObjectiveDialog";
+import { Button } from "@/components/ui/button";
 import { AREA_SHORT, AREA_VAR, type Objective } from "@/lib/kma";
 import { objectivesQuery, CURRENT_YEAR } from "@/lib/kma-queries";
+
 
 export const Route = createFileRoute("/_authenticated/mal")({
   head: () => ({
@@ -34,13 +39,21 @@ function progressPct(o: Objective): number {
 
 function ObjectivesPage() {
   const { data: objectives = [] } = useQuery(objectivesQuery());
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <AppShell
       title={`KMA-mål ${CURRENT_YEAR}`}
       subtitle="Måluppföljning som underlag till ledningens genomgång"
+      actions={
+        <Button size="sm" onClick={() => setDialogOpen(true)}>
+          <Plus className="size-4" /> Nytt mål
+        </Button>
+      }
     >
+      <ObjectiveDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+
         {objectives.map((o) => {
           const pct = progressPct(o);
           return (
