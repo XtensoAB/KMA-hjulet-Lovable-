@@ -26,6 +26,11 @@ jobs:
         run: npm run build
         env:
           NITRO_PRESET: node-server
+      - name: Debug build output
+        run: |
+          pwd
+          ls -la
+          find . -type d -name ".output"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
