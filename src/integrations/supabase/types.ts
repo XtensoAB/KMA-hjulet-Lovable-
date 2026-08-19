@@ -566,6 +566,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_organization_access: { Args: never; Returns: string }
       current_org_id: { Args: never; Returns: string }
       has_org_role: {
         Args: {
