@@ -46,10 +46,10 @@ export const myOrgQuery = () =>
       const user = userData.user;
       if (!user) return null;
 
-      // Se till att den inloggade användaren har en profil.
-      await supabase
-        .from("profiles")
-        .upsert({ id: user.id, email: user.email ?? null }, { onConflict: "id" });
+      // Se till att den inloggade användaren har en profil och ansluts till
+      // rätt bolag via inbjudan eller e-postdomän (även befintliga konton).
+      await supabase.rpc("claim_organization_access");
+
 
       const { data, error } = await supabase
         .from("organization_members")
