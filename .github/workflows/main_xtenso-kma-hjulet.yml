@@ -29,21 +29,13 @@ jobs:
 
       - name: Verify output
         run: |
-          pwd
-          ls -la
           ls -la .output
           ls -la .output/server || true
           ls -la .output/public || true
 
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5A55D70831C7438BA3B9791C48A2C04B }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_88C7FB145F1B4843877359A474336DBC }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5F6EE25E9FF448EAA9D6A22349BE04A1 }}
-
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: xtenso-kma-hjulet
+          app-name: 'xtenso-kma-hjulet'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2E5A0678FB7C4B1EAD68384E6F30D79F }}
           package: .output
