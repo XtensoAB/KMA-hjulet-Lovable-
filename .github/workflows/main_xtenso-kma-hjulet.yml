@@ -1,4 +1,4 @@
-name: Build and Deploy KMA-hjulet
+name: Build and deploy KMA-hjulet to Azure
 
 on:
   push:
@@ -22,20 +22,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build application
+      - name: Build application for Node.js
+        run: npm run build
         env:
           NITRO_PRESET: node-server
-        run: npm run build
 
-      - name: Verify output
+      - name: Verify deployment package
+        shell: bash
         run: |
+          test -f .output/server/index.mjs
+          test -d .output/public
+          echo "Nitro server and public files found"
           ls -la .output
-          ls -la .output/server || true
-          ls -la .output/public || true
+          ls -la .output/server
+          ls -la .output/public
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'xtenso-kma-hjulet'
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2E5A0678FB7C4B1EAD68384E6F30D79F }}
           package: .output
