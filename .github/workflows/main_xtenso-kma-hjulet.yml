@@ -38,6 +38,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'xtenso-kma-hjulet'
+          app-name: xtenso-kma-hjulet-e2cthcgef7g5b3ek
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2E5A0678FB7C4B1EAD68384E6F30D79F }}
           package: .output
