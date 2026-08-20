@@ -1,6 +1,58 @@
-      - name: Upload artifact
+name: Build and deploy Node.js app to Azure Web App - xtenso-kma-hjulet
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        env:
+          NITRO_PRESET: node-server
+        run: npm run build
+
+      - name: Show build output
+        run: |
+          echo "===== ROOT ====="
+          ls -la
+
+          echo "===== .output ====="
+          ls -la .output || true
+
+          echo "===== .output/server ====="
+          ls -la .output/server || true
+
+          echo "===== .output/public ====="
+          ls -la .output/public || true
+
+      - name: Verify build exists
+        run: |
+          if [ ! -d ".output" ]; then
+            echo ".output folder not found!"
+            exit 1
+          fi
+
+      - name: Upload deployment artifact
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .output/**
-          if-no-files-found: error
+          path: .output
+
+  deploy:
+    runs-on:
