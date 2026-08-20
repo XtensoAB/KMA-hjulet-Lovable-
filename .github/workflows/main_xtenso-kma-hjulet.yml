@@ -1,4 +1,4 @@
-name: Verify Build
+name: Build and Deploy KMA-hjulet
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +31,19 @@ jobs:
         run: |
           pwd
           ls -la
-          ls -la .output || true
+          ls -la .output
           ls -la .output/server || true
           ls -la .output/public || true
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5A55D70831C7438BA3B9791C48A2C04B }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_88C7FB145F1B4843877359A474336DBC }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5F6EE25E9FF448EAA9D6A22349BE04A1 }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: xtenso-kma-hjulet
+          package: .output
