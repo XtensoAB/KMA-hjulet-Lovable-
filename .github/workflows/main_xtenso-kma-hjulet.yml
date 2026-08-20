@@ -1,4 +1,4 @@
-name: Build and deploy Node.js app to Azure Web App - xtenso-kma-hjulet
+name: Verify Build
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build application
         env:
@@ -29,15 +29,7 @@ jobs:
 
       - name: Verify output
         run: |
-          pwd
           ls -la
           ls -la .output
           ls -la .output/server || true
           ls -la .output/public || true
-
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: xtenso-kma-hjulet-e2cthcgef7g5b3ek
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2E5A0678FB7C4B1EAD68384E6F30D79F }}
-          package: .output
