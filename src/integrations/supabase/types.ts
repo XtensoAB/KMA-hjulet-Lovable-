@@ -166,6 +166,241 @@ export type Database = {
           },
         ]
       }
+      business_activities: {
+        Row: {
+          category: Database["public"]["Enums"]["business_category"]
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          month: number
+          organization_id: string | null
+          recurring: boolean
+          responsible_role: string | null
+          status: Database["public"]["Enums"]["activity_status"]
+          title: string
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["business_category"]
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          month: number
+          organization_id?: string | null
+          recurring?: boolean
+          responsible_role?: string | null
+          status?: Database["public"]["Enums"]["activity_status"]
+          title: string
+          updated_at?: string
+          year?: number
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["business_category"]
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          month?: number
+          organization_id?: string | null
+          recurring?: boolean
+          responsible_role?: string | null
+          status?: Database["public"]["Enums"]["activity_status"]
+          title?: string
+          updated_at?: string
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_activities_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      business_goal_items: {
+        Row: {
+          created_at: string
+          description: string | null
+          due_date: string | null
+          effort: Database["public"]["Enums"]["priority_effort"]
+          goal_id: string
+          id: string
+          importance: Database["public"]["Enums"]["priority_importance"]
+          kind: Database["public"]["Enums"]["goal_item_kind"]
+          organization_id: string | null
+          responsible_role: string | null
+          status: Database["public"]["Enums"]["activity_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          effort?: Database["public"]["Enums"]["priority_effort"]
+          goal_id: string
+          id?: string
+          importance?: Database["public"]["Enums"]["priority_importance"]
+          kind?: Database["public"]["Enums"]["goal_item_kind"]
+          organization_id?: string | null
+          responsible_role?: string | null
+          status?: Database["public"]["Enums"]["activity_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          effort?: Database["public"]["Enums"]["priority_effort"]
+          goal_id?: string
+          id?: string
+          importance?: Database["public"]["Enums"]["priority_importance"]
+          kind?: Database["public"]["Enums"]["goal_item_kind"]
+          organization_id?: string | null
+          responsible_role?: string | null
+          status?: Database["public"]["Enums"]["activity_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_goal_items_goal_id_fkey"
+            columns: ["goal_id"]
+            isOneToOne: false
+            referencedRelation: "business_goals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "business_goal_items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      business_goals: {
+        Row: {
+          baseline: number | null
+          created_at: string
+          current_value: number | null
+          description: string | null
+          id: string
+          organization_id: string | null
+          responsible_role: string | null
+          status: Database["public"]["Enums"]["activity_status"]
+          target: number | null
+          title: string
+          unit: string | null
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          baseline?: number | null
+          created_at?: string
+          current_value?: number | null
+          description?: string | null
+          id?: string
+          organization_id?: string | null
+          responsible_role?: string | null
+          status?: Database["public"]["Enums"]["activity_status"]
+          target?: number | null
+          title: string
+          unit?: string | null
+          updated_at?: string
+          year?: number
+        }
+        Update: {
+          baseline?: number | null
+          created_at?: string
+          current_value?: number | null
+          description?: string | null
+          id?: string
+          organization_id?: string | null
+          responsible_role?: string | null
+          status?: Database["public"]["Enums"]["activity_status"]
+          target?: number | null
+          title?: string
+          unit?: string | null
+          updated_at?: string
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_goals_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      communication_logs: {
+        Row: {
+          channel: string | null
+          created_at: string
+          id: string
+          message: string | null
+          organization_id: string | null
+          performed_at: string | null
+          planned_date: string | null
+          responsible_role: string | null
+          stakeholder_id: string | null
+          status: Database["public"]["Enums"]["comm_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          channel?: string | null
+          created_at?: string
+          id?: string
+          message?: string | null
+          organization_id?: string | null
+          performed_at?: string | null
+          planned_date?: string | null
+          responsible_role?: string | null
+          stakeholder_id?: string | null
+          status?: Database["public"]["Enums"]["comm_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          channel?: string | null
+          created_at?: string
+          id?: string
+          message?: string | null
+          organization_id?: string | null
+          performed_at?: string | null
+          planned_date?: string | null
+          responsible_role?: string | null
+          stakeholder_id?: string | null
+          status?: Database["public"]["Enums"]["comm_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_logs_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "communication_logs_stakeholder_id_fkey"
+            columns: ["stakeholder_id"]
+            isOneToOne: false
+            referencedRelation: "stakeholders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       deviations: {
         Row: {
           activity_id: string | null
@@ -507,6 +742,50 @@ export type Database = {
         }
         Relationships: []
       }
+      stakeholders: {
+        Row: {
+          created_at: string
+          how_to_communicate: string | null
+          id: string
+          interaction_need: string | null
+          name: string
+          organization_id: string | null
+          sort_order: number
+          updated_at: string
+          what_to_communicate: string | null
+        }
+        Insert: {
+          created_at?: string
+          how_to_communicate?: string | null
+          id?: string
+          interaction_need?: string | null
+          name: string
+          organization_id?: string | null
+          sort_order?: number
+          updated_at?: string
+          what_to_communicate?: string | null
+        }
+        Update: {
+          created_at?: string
+          how_to_communicate?: string | null
+          id?: string
+          interaction_need?: string | null
+          name?: string
+          organization_id?: string | null
+          sort_order?: number
+          updated_at?: string
+          what_to_communicate?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stakeholders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           activity_id: string
@@ -594,6 +873,8 @@ export type Database = {
         | "medarbetarsamtal"
         | "inventering"
         | "policy"
+      business_category: "personal" | "foretag" | "styrelse" | "externt"
+      comm_status: "planerad" | "genomford" | "installd"
       deviation_status: "ny" | "under_utredning" | "atgard_pagar" | "stangd"
       deviation_type:
         | "avvikelse"
@@ -601,8 +882,11 @@ export type Database = {
         | "olycksfall"
         | "forbattringsforslag"
         | "kundklagomal"
+      goal_item_kind: "delmal" | "aktivitet"
       iso_area: "kvalitet" | "miljo" | "arbetsmiljo" | "gemensamt"
       org_role: "owner" | "admin" | "member"
+      priority_effort: "latt" | "svar"
+      priority_importance: "viktig" | "mindre_viktig"
       task_status: "open" | "in_progress" | "done"
     }
     CompositeTypes: {
@@ -747,6 +1031,8 @@ export const Constants = {
         "inventering",
         "policy",
       ],
+      business_category: ["personal", "foretag", "styrelse", "externt"],
+      comm_status: ["planerad", "genomford", "installd"],
       deviation_status: ["ny", "under_utredning", "atgard_pagar", "stangd"],
       deviation_type: [
         "avvikelse",
@@ -755,8 +1041,11 @@ export const Constants = {
         "forbattringsforslag",
         "kundklagomal",
       ],
+      goal_item_kind: ["delmal", "aktivitet"],
       iso_area: ["kvalitet", "miljo", "arbetsmiljo", "gemensamt"],
       org_role: ["owner", "admin", "member"],
+      priority_effort: ["latt", "svar"],
+      priority_importance: ["viktig", "mindre_viktig"],
       task_status: ["open", "in_progress", "done"],
     },
   },
