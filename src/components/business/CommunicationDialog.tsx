@@ -37,7 +37,7 @@ export function CommunicationDialog({
   const queryClient = useQueryClient();
   const [stakeholderId, setStakeholderId] = useState("");
   const [title, setTitle] = useState("");
-  const [channel, setChannel] = useState(CHANNELS[0]);
+  const [channel, setChannel] = useState<string>(CHANNELS[0] ?? "LinkedIn");
   const [message, setMessage] = useState("");
   const [plannedDate, setPlannedDate] = useState("");
   const [status, setStatus] = useState<CommStatus>("planerad");
@@ -47,7 +47,7 @@ export function CommunicationDialog({
     if (open) {
       setStakeholderId(defaultStakeholderId ?? stakeholders[0]?.id ?? "");
       setTitle("");
-      setChannel(CHANNELS[0]);
+      setChannel(CHANNELS[0] ?? "LinkedIn");
       setMessage("");
       setPlannedDate("");
       setStatus("planerad");
