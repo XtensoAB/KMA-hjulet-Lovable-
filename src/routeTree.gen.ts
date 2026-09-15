@@ -20,6 +20,9 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedDokumentRouteImport } from './routes/_authenticated/dokument'
 import { Route as AuthenticatedMalRouteImport } from './routes/_authenticated/mal'
 import { Route as AuthenticatedManadMonthRouteImport } from './routes/_authenticated/manad.$month'
+import { Route as AuthenticatedVerksamhetIndexRouteImport } from './routes/_authenticated/verksamhet.index'
+import { Route as AuthenticatedVerksamhetArshjulRouteImport } from './routes/_authenticated/verksamhet.arshjul'
+import { Route as AuthenticatedVerksamhetMalRouteImport } from './routes/_authenticated/verksamhet.mal'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -75,6 +78,24 @@ const AuthenticatedManadMonthRoute = AuthenticatedManadMonthRouteImport.update({
   path: '/manad/$month',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedVerksamhetIndexRoute =
+  AuthenticatedVerksamhetIndexRouteImport.update({
+    id: '/verksamhet/',
+    path: '/verksamhet/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVerksamhetArshjulRoute =
+  AuthenticatedVerksamhetArshjulRouteImport.update({
+    id: '/verksamhet/arshjul',
+    path: '/verksamhet/arshjul',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedVerksamhetMalRoute =
+  AuthenticatedVerksamhetMalRouteImport.update({
+    id: '/verksamhet/mal',
+    path: '/verksamhet/mal',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +108,9 @@ export interface FileRoutesByFullPath {
   '/dokument': typeof AuthenticatedDokumentRoute
   '/mal': typeof AuthenticatedMalRoute
   '/manad/$month': typeof AuthenticatedManadMonthRoute
+  '/verksamhet/arshjul': typeof AuthenticatedVerksamhetArshjulRoute
+  '/verksamhet/mal': typeof AuthenticatedVerksamhetMalRoute
+  '/verksamhet/': typeof AuthenticatedVerksamhetIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,6 +123,9 @@ export interface FileRoutesByTo {
   '/dokument': typeof AuthenticatedDokumentRoute
   '/mal': typeof AuthenticatedMalRoute
   '/manad/$month': typeof AuthenticatedManadMonthRoute
+  '/verksamhet/arshjul': typeof AuthenticatedVerksamhetArshjulRoute
+  '/verksamhet/mal': typeof AuthenticatedVerksamhetMalRoute
+  '/verksamhet': typeof AuthenticatedVerksamhetIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,6 +140,9 @@ export interface FileRoutesById {
   '/_authenticated/dokument': typeof AuthenticatedDokumentRoute
   '/_authenticated/mal': typeof AuthenticatedMalRoute
   '/_authenticated/manad/$month': typeof AuthenticatedManadMonthRoute
+  '/_authenticated/verksamhet/arshjul': typeof AuthenticatedVerksamhetArshjulRoute
+  '/_authenticated/verksamhet/mal': typeof AuthenticatedVerksamhetMalRoute
+  '/_authenticated/verksamhet/': typeof AuthenticatedVerksamhetIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,6 +157,9 @@ export interface FileRouteTypes {
     | '/dokument'
     | '/mal'
     | '/manad/$month'
+    | '/verksamhet/arshjul'
+    | '/verksamhet/mal'
+    | '/verksamhet/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,6 +172,9 @@ export interface FileRouteTypes {
     | '/dokument'
     | '/mal'
     | '/manad/$month'
+    | '/verksamhet/arshjul'
+    | '/verksamhet/mal'
+    | '/verksamhet'
   id:
     | '__root__'
     | '/'
@@ -152,6 +188,9 @@ export interface FileRouteTypes {
     | '/_authenticated/dokument'
     | '/_authenticated/mal'
     | '/_authenticated/manad/$month'
+    | '/_authenticated/verksamhet/arshjul'
+    | '/_authenticated/verksamhet/mal'
+    | '/_authenticated/verksamhet/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -240,6 +279,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedManadMonthRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/verksamhet/': {
+      id: '/_authenticated/verksamhet/'
+      path: '/verksamhet'
+      fullPath: '/verksamhet/'
+      preLoaderRoute: typeof AuthenticatedVerksamhetIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/verksamhet/arshjul': {
+      id: '/_authenticated/verksamhet/arshjul'
+      path: '/verksamhet/arshjul'
+      fullPath: '/verksamhet/arshjul'
+      preLoaderRoute: typeof AuthenticatedVerksamhetArshjulRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/verksamhet/mal': {
+      id: '/_authenticated/verksamhet/mal'
+      path: '/verksamhet/mal'
+      fullPath: '/verksamhet/mal'
+      preLoaderRoute: typeof AuthenticatedVerksamhetMalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -251,6 +311,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDokumentRoute: typeof AuthenticatedDokumentRoute
   AuthenticatedMalRoute: typeof AuthenticatedMalRoute
   AuthenticatedManadMonthRoute: typeof AuthenticatedManadMonthRoute
+  AuthenticatedVerksamhetArshjulRoute: typeof AuthenticatedVerksamhetArshjulRoute
+  AuthenticatedVerksamhetMalRoute: typeof AuthenticatedVerksamhetMalRoute
+  AuthenticatedVerksamhetIndexRoute: typeof AuthenticatedVerksamhetIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -261,6 +324,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDokumentRoute: AuthenticatedDokumentRoute,
   AuthenticatedMalRoute: AuthenticatedMalRoute,
   AuthenticatedManadMonthRoute: AuthenticatedManadMonthRoute,
+  AuthenticatedVerksamhetArshjulRoute: AuthenticatedVerksamhetArshjulRoute,
+  AuthenticatedVerksamhetMalRoute: AuthenticatedVerksamhetMalRoute,
+  AuthenticatedVerksamhetIndexRoute: AuthenticatedVerksamhetIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
